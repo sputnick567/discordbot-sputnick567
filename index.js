@@ -126,7 +126,7 @@ client.on("message", message => {
 });
 
 try {
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN).catch("error occured");
 } catch (error) {
 	console.log("Some Error");
 }
