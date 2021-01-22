@@ -125,5 +125,9 @@ client.on("message", message => {
     } 
 });
 
-client.login(process.env.BOT_TOKEN).catch(console.error);
+try {
+client.login(process.env.BOT_TOKEN);
+} catch (Error e) {
+	console.log("Some Error");
+}
 //client.login(token); // starts the bot up
