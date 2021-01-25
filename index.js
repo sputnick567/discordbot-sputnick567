@@ -3,10 +3,14 @@ const Discord = require("discord.js"); // imports the discord library
 
 const client = new Discord.Client(); // creates a discord client
 //const token = fs.readFileSync("token.txt").toString(); // gets your token from the file
+const db = require("./db.js");
 
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
 	console.log("Ready!");
 });
+
+
+
 
 
 const prefix = "!";
@@ -99,8 +103,9 @@ function test (message) {
 	.setImage('https://i.imgur.com/wSTFkRM.png')
 	.setTimestamp()
 	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
-
-	
+	let server = message.guild.id;
+	console.log(server);
+	console.log(db.getCommands(server));
 }
 
 
