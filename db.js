@@ -1,16 +1,14 @@
+const { Client } = require('pg');
 
 
-
-const client;
-
-function init () {
-	const { Client } = require('pg');
-	client = new Client({
+const client = new Client({
 		connectionString: conn,
 		ssl: {
 		rejectUnauthorized: false
 		  }
 	});
+
+function init () {
 
 	client.connect();
 }
