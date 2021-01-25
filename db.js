@@ -16,7 +16,11 @@ function init () {
 
 
 function getCommands(serverId) {
+	try {
 	let info = client.query("SELECT EXISTS (SELECT * FROM server_info WHERE serverId = " + serverId + ")");
+	} catch (error) {
+		console.log("error");
+	}
 	return info;
 		
 }
