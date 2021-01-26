@@ -29,7 +29,16 @@ function init () {
 
 function getCommands(serverId) {
 	try {
-		client.query("INSERT INTO servers.server_info VALUES (" + serverId + ",'!', '<name> welcome to the server'");
+		client.query("INSERT INTO servers.server_info VALUES (" + serverId + ",'!', '<name> welcome to the server'", (err, res) => {
+			if (err) {
+				console.log("error wierdo");
+			}
+			else {
+				for (let row of res.rows) {
+			    	console.log(JSON.stringify(row));
+			  	}
+			}
+		});
 		cleint.query("SELECT commandPrefix FROM servers.server_info WHERE serverId = " + serverId, (err, res) => {
 			if (err) throw err;
 			console.log("results of query");
