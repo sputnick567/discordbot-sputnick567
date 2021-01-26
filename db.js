@@ -39,7 +39,9 @@ function getCommands(serverId) {
 			}
 		});
 		client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-	  	if (err) throw err;
+	  	if (err) {
+	  		console.log("Some weired error");
+	  	}
 	  	console.log("ROWS:")
 	  	for (let row of res.rows) {
 	    	console.log(JSON.stringify(row));
