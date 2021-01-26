@@ -9,10 +9,18 @@ const client = new Client({
 	});
 
 function init () {
-
+	
 	client.connect();
-}
+	client.query("CREATE TABLE server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50))", (err, res) => {
+		//function with param err and res 
+		if (err) {
+			console.log("Error " + err);
+		}
+		console.log("Result:");
+		console.log(JSON.stringify(res));
+	});
 
+}
 
 
 function getCommands(serverId) {
@@ -24,10 +32,6 @@ function getCommands(serverId) {
     	console.log(JSON.stringify(row));
   	}
 	});
-	} catch (error) {
-		console.log("error");
-	}
-	//return info;
 		
 }
 
