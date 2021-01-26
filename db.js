@@ -11,7 +11,10 @@ const client = new Client({
 function init () {
 	
 	client.connect();
-	client.query("CREATE TABLE server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50))", (err, res) => {
+	//shema = wie neuer ordner
+	client.query("CREATE SCHEMA servers");
+	client.query("CREATE TABLE servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50))", (err, res) => {
+	client.query("DROP TABLE server_info");
 		//function with param err and res 
 		if (err) {
 			console.log("Error " + err);
