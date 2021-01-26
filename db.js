@@ -33,6 +33,9 @@ function getCommands(serverId) {
   	}
 	});
 		
+	} catch (error) {
+		console.log("Some Error occured");
+	}
 }
 
 module.exports.init = init
