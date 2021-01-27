@@ -59,6 +59,17 @@ function serverExists (serverId) {
 
 
 function getCommands(serverId) {
+	client.query("SELECT commands FROM servers.server_info WHERE serverID = " + serverId, (err, res) => {
+		if (err) {
+			console.log("error at db.js:62");
+			console.log(err);
+			return null
+		} else {
+			console.log("Got commands for " + serverId);
+			console.log(res.rows);
+			return JSON.parse(res.rows[0]);
+		}
+	});
 	/*try {
 		client.query("INSERT INTO servers.server_info VALUES (" + serverId + ",'!', '<name> welcome to the server'", (err, res) => {
 			if (err) {
