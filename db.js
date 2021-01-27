@@ -101,7 +101,8 @@ function someError() {
 
 function addServer (serverId) {
 	console.log("Adding server with id " + serverId);
-	client.query('INSERT INTO servers.server_info VALUES (' + serverId + ', ' + defaultPrefix + ', "", '+ defaultCommands, (err, res) => {
+	console.log("[DEBUG] " + defaultPrefix);
+	client.query('INSERT INTO servers.server_info VALUES (' + serverId + ', ' + defaultPrefix + ', "", '+ defaultCommands + ";", (err, res) => {
 		if (err) {
 			someError();
 			console.trace();
