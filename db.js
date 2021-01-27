@@ -111,7 +111,7 @@ function someError() {
 
 function addServer (serverId) {
 	console.log("Adding server with id " + serverId);
-	let qQuery = "INSERT INTO servers.server_info VALUES ({0}, {1}, {2}, {3})".format(serverId, defaultPrefix, defaultWelcomeMessage, defaultCommands);
+	let qQuery = "INSERT INTO servers.server_info VALUES ({0}, {1}, {2}, {3})".format(serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands));
 	console.log(qQuery);	
 	client.query(qQuery, (err, res) => {
 															//serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480)
