@@ -15,7 +15,8 @@ function init () {
 	//shema = wie neuer ordner
 	client.query("CREATE SCHEMA IF NOT EXISTS servers", (err, res) => {
 		if (err) {
-			console.log("Some error at db.js:15");
+			someError()
+			console.trace();
 			console.log(err);
 			
 		} else {
@@ -28,7 +29,8 @@ function init () {
 	
 		//function with param err and res 
 		if (err) {
-			console.log("Error " + err);
+			someError();
+			console.trace();
 		} else {
 
 		console.log("Result:");
@@ -41,7 +43,8 @@ function init () {
 function serverExists (serverId) {
 	client.query("SELECT * FROM servers.server_info WHERE serverId = " + serverId + ";", (err, res) => {
 		if (err) {
-			console.log("error at db.js:42");
+			someError();
+			console.trace();
 			console.log(err);
 			return false;
 		} else {
@@ -61,7 +64,8 @@ function serverExists (serverId) {
 function getCommands(serverId) {
 	client.query("SELECT commands FROM servers.server_info WHERE serverID = " + serverId, (err, res) => {
 		if (err) {
-			console.log("error at db.js:62");
+			someError();
+			console.trace();
 			console.log(err);
 			return null
 		} else {
@@ -76,7 +80,8 @@ function getCommands(serverId) {
 function getPrefix (serverId) {
 	client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = " + serverId + ";", (err, res) => {
 		if (err) {
-			console.log("error at db.js:77");
+			someError();
+			console.trace();
 			console.log(err);
 			return null;
 		} else if (serverExists(serverId)) {
@@ -90,11 +95,16 @@ function getPrefix (serverId) {
 
 }
 
+function someError() {
+	console.log("Some error occured!");
+}
+
 function addServer (serverId) {
 	console.log("Adding server with id " + serverId);
 	client.query('INSERT INTO servers.server_info VALUES (' + serverId + ', ' + defaultPrefix + ', "", '+ defaultCommands, (err, res) => {
 		if (err) {
-			console.log("Error at db.js:93");
+			someError();
+			console.trace();
 			console.log(err);
 			return false;
 		} else {
