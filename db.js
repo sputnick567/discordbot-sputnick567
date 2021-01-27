@@ -15,6 +15,7 @@ function init () {
 	client.query("CREATE SCHEMA servers", (err, res) => {
 		if (err) {
 			console.log("Some error at db.js:15");
+			console.log(err);
 			
 		} else {
 			console.log("Result of CREATE SCHEMA servers");
