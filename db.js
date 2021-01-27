@@ -3,6 +3,15 @@ const defaultPrefix = "!";
 const defaultCommands = ["test", "help", "random"];
 const defaultWelcomeMessage = "<name>, welcome to the server!";
 
+String.prototype.format = function() {
+	a = this;
+	for (k in arguments) {
+		a = a.replace("{" + k + "}", arguments[k])
+	}
+	return a
+}
+
+
 const client = new Client({
 	connectionString: process.env.DATABASE_URL,
 	ssl: {
