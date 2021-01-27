@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 const defaultPrefix = "!";
-const defaultCommand = ["test", "help", "random"];
+const defaultCommands = ["test", "help", "random"];
 
 const client = new Client({
 	connectionString: process.env.DATABASE_URL,
