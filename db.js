@@ -12,7 +12,7 @@ function init () {
 	
 	client.connect();
 	//shema = wie neuer ordner
-	client.query("CREATE SCHEMA servers", (err, res) => {
+	client.query("CREATE SCHEMA IF NOT EXISTS servers", (err, res) => {
 		if (err) {
 			console.log("Some error at db.js:15");
 			console.log(err);
@@ -23,15 +23,17 @@ function init () {
 		}
 	});
 	//client.query("DROP TABLE server_info");
-	/*client.query("CREATE TABLE servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50))", (err, res) => {
+	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50))", (err, res) => {
 	
 		//function with param err and res 
 		if (err) {
 			console.log("Error " + err);
-		}
+		} else {
+
 		console.log("Result:");
 		console.log(JSON.stringify(res));
-	});*/
+		}
+	});
 
 }
 

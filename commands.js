@@ -1,4 +1,5 @@
 const commands = new Map();
+const Discord = require("discord.js")
 const argsInfo = "<arg> are optional, [arg] are required!";
 
 function help  (message) {
