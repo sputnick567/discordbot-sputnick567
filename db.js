@@ -111,7 +111,7 @@ function someError() {
 
 function addServer (serverId) {
 	console.log("Adding server with id " + serverId);							
-	client.query("INSERT INTO servers.server_info VALUES ({0}, {1}, {2}, {3})".format(serverId, defaultPrefix, defaultWelcomeMessage, defaultCommands), (err, res) => {
+	client.query("INSERT INTO servers.server_info VALUES ($1, $2, $3, $4)", [serverId, defaultPrefix, defaultWelcomeMessage, defaultCommands], (err, res) => {
 															//serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480)
 		if (err) {
 			someError();
