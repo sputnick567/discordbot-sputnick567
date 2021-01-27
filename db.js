@@ -1,8 +1,8 @@
 const { Client } = require('pg');
 const defaultPrefix = "!";
 const defaultCommands = ["test", "help", "random"];
-const defaultWelcomeMessage = '<name>\, welcome to the server!';
-
+const defaultWelcomeMessage = '<name><c> welcome to the server!';
+//<c> = ,
 String.prototype.format = function() {
 	a = this;
 	for (k in arguments) {
