@@ -1,12 +1,13 @@
 const { Client } = require('pg');
-
+const defaultPrefix = "!";
+const defaultCommand = ["test", "help", "random"];
 
 const client = new Client({
-		connectionString: process.env.DATABASE_URL,
-		ssl: {
-		rejectUnauthorized: false
-		  }
-	});
+	connectionString: process.env.DATABASE_URL,
+	ssl: {
+	rejectUnauthorized: false
+	  }
+});
 
 function init () {
 	
@@ -23,7 +24,7 @@ function init () {
 		}
 	});
 	//client.query("DROP TABLE server_info");
-	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50))", (err, res) => {
+	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480))", (err, res) => {
 	
 		//function with param err and res 
 		if (err) {
@@ -37,9 +38,28 @@ function init () {
 
 }
 
+function serverExists (serverId) {
+	client.query("SELECT * FROM servers.server_info WHERE serverId = " + serverId + ";", (err, res) => {
+		if (err) {
+			console.log("error at db.js:42");
+			console.log(err);
+			return false;
+		} else {
+			if (res.rows.length != 0) {
+				console.log("Server with id " + serverId + "exists!");
+				return true;
+			} else {
+				console.log("Server with id " + serverId + "does not exist!");
+				addServer(serverId);
+				return false;
+			}
+		}
+	});
+}
+
 
 function getCommands(serverId) {
-	try {
+	/*try {
 		client.query("INSERT INTO servers.server_info VALUES (" + serverId + ",'!', '<name> welcome to the server'", (err, res) => {
 			if (err) {
 				console.log("error wierdo");
@@ -71,7 +91,41 @@ function getCommands(serverId) {
 	} catch (error) {
 		console.log("Some Error occured");
 	}
+	*/
 }
 
-module.exports.init = init
-module.exports.getCommands = getCommands
+function getPrefix (serverId) {
+	client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = " + serverId + ";", (err, res) => {
+		if (err) {
+			console.log("error at db.js:77");
+			console.log(err);
+			return null;
+		} else if (serverExists(serverId)) {
+			console.log("Got prefix")
+			console.log(res.rows);
+			return res.rows[0];
+		} else {
+			return null;
+		}
+	});
+
+}
+
+function addServer (serverId) {
+	console.log("Adding server with id " + serverId);
+	client.query('INSERT INTO servers.server_info VALUES (' + serverId + ', ' + defaultPrefix + ', "", '+ defaultCommands, (err, res) => {
+		if (err) {
+			console.log("Error at db.js:93");
+			console.log(err);
+			return false;
+		} else {
+			console.log("succesfully added server " + serverId);
+			console.log(res);
+			return true;
+		}
+	});
+} 
+
+module.exports.init = init;
+module.exports.getCommands = getCommands;
+module.exports.getPrefix = getPrefix;

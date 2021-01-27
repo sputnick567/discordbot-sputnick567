@@ -3,15 +3,13 @@ const Discord = require("discord.js"); // imports the discord library
 
 const client = new Discord.Client(); // creates a discord client
 //const token = fs.readFileSync("token.txt").toString(); // gets your token from the file
-const db = require("./db.js");
-db.init();
+
 const cmdMngr = require("./commands.js");
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
 	console.log("Ready!");
 });
 
 
-const prefix = "!";
 
 
 let commands = cmdMngr.commands;
@@ -35,6 +33,7 @@ function report (message) {
 
 
 client.on("message", message => {
+	const prefix = cmdMngr.db.getPrefix(message.guild.id);
     if (message.content[0] === prefix) {
         const command = message.content.split(" ")[0].substr(1); // gets the command name
         if (commands.has(command)) { // checks if the map contains the command
