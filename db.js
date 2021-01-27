@@ -100,8 +100,9 @@ function someError() {
 }
 
 function addServer (serverId) {
-	console.log("Adding server with id " + serverId);
-	client.query('INSERT INTO servers.server_info VALUES (' + serverId + ', ' + defaultPrefix + ', "", '+ defaultCommands + ");", (err, res) => {
+	console.log("Adding server with id " + serverId);							
+	client.query('INSERT INTO servers.server_info VALUES (' + serverId + ', ' + defaultPrefix + ', "<name>, welcome to the server!", '+ defaultCommands + ");", (err, res) => {
+															//serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480)
 		if (err) {
 			someError();
 			console.trace();
