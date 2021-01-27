@@ -5,6 +5,7 @@ const client = new Discord.Client(); // creates a discord client
 //const token = fs.readFileSync("token.txt").toString(); // gets your token from the file
 const db = require("./db.js");
 db.init();
+const cmdMngr = require("./commands.js");
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
 	console.log("Ready!");
 });
@@ -14,24 +15,13 @@ client.once("ready", () => { // prints "Ready!" to the console once the bot is o
 
 
 const prefix = "!";
-const argsInfo = "<arg> are optional, [arg] are reqired!";
+const argsInfo = "<arg> are optional, [arg] are required!";
 
-let commands = new Map();
+let commands = cmdMngr.commands;
 
-function getArgs (message) {
-	var args = message.content.split(" ");
-	args.shift();
-	return args;
-}
 
-function ping (message) {
-	message.channel.send("<@!" + message.author.id + ">,");
-}
 
-function random(message) {
-    const number = Math.random(); // generates a random number
-    message.channel.send(number.toString()); // sends a message to the channel with the number
-}
+
 
 function modhelp (message) {
 
@@ -80,9 +70,6 @@ function help  (message) {
 	}
 }
 
-function invalidArgs (message) {
-	message.channel.send("Invalid arguments! use !help <cmd> to get help to this command")
-}
 
 
 function test (message) {
@@ -110,10 +97,7 @@ function test (message) {
 
 
 
-//name, [function, usage, description, show in !help]
-commands.set("random", [random, "random", "returns a random number",{"random": "returns a random number between 0 and 1", "random <x>": "returns a random whole number between 1 and x"}, true]);
-commands.set("help", [help, "help <cmdName>", "shows list of all commands", {"help":"returns list of all commands", "help <cmdName>": "gives info to cmd"}, true]);
-commands.set("test", [test, "","test command","", false])
+
 
 client.on("message", message => {
     if (message.content[0] === prefix) {

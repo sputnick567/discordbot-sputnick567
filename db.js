@@ -12,7 +12,15 @@ function init () {
 	
 	client.connect();
 	//shema = wie neuer ordner
-	//client.query("CREATE SCHEMA servers");
+	client.query("CREATE SCHEMA servers", (err, res) => {
+		if (err) {
+			console.log("Some error at db.js:15");
+			
+		} else {
+			console.log("Result of CREATE SCHEMA servers");
+			console.log(res);
+		}
+	});
 	//client.query("DROP TABLE server_info");
 	/*client.query("CREATE TABLE servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50))", (err, res) => {
 	
