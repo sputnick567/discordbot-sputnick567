@@ -51,29 +51,19 @@ function init () {
 }
 
 function serverExists (serverId) {
-	console.log("Checking if SCHEMA exists!");
-	client.query("SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'servers';", (err ,res) =>  {
+	console.log("Checking for columns!");
+	client.query("SELECT * FROM information_schema.columns WHERE table_schema = 'servers'AND table_name = 'server_info';", (err ,res) =>  {
 		if (err) {
 			someError();
 			console.trace();
 			console.log(err);
 			return false;
 		} else {
-			console.log("Check if schema exists");
+			console.log("Check for columns");
 			console.log(res.rows);
+			console.log(res);
 			if (res.rows.length === 0) {
-				console.log("SCHEMA doesnt exist --> creating it!");
-					client.query("CREATE SCHEMA IF NOT EXISTS servers", (err, res) => {
-				if (err) {
-					someError()
-					console.trace();
-					console.log(err);
-					
-				} else {
-					console.log("Result of CREATE SCHEMA servers");
-					console.log(res);
-				}
-	});
+				console.log("idk")
 			} else {
 				console.log("SCHEMA exists")
 			}
