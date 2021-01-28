@@ -110,6 +110,16 @@ function someError() {
 }
 
 function addServer (serverId) {
+	client.query("SELECT pg_is_in_recovery();", (err, res) => {
+		if (err) {
+			someError();
+			console.trace();
+			console.log(err);
+			return false;
+		} else {
+			console.log(res);
+		}
+	});
 	console.log("Adding server with id " + serverId);
 	let qQuery = "INSERT INTO servers.server_info VALUES ({0}, {1}, {2}, {3})".format(serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands));
 	console.log(qQuery);	
