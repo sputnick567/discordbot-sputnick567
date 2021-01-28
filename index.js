@@ -12,7 +12,7 @@ client.once("ready", () => { // prints "Ready!" to the console once the bot is o
 
 
 
-let commands = cmdMngr.commands;
+const commands = cmdMngr.commands;
 
 
 
@@ -35,7 +35,9 @@ function report (message) {
 client.on("message", message => {
 	const prefix = cmdMngr.db.getPrefix(message.guild.id);
     if (message.content[0] === prefix) {
-        const command = message.content.split(" ")[0].substr(1); // gets the command name
+        const command = message.content.split(" ")[0].substr(1);
+         // gets the command name
+        console.log("Command " + command + " was executed!");
         if (commands.has(command)) { // checks if the map contains the command
             commands.get(command)[0](message); // runs the command
         }  
