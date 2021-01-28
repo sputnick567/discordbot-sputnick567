@@ -51,7 +51,7 @@ function init () {
 }
 
 function serverExists (serverId) {
-	console.log("Checking for columns!");
+	/*console.log("Checking for columns!");
 	client.query("SELECT * FROM information_schema.columns WHERE table_schema = 'servers'AND table_name = 'server_info';", (err ,res) =>  {
 		if (err) {
 			someError();
@@ -59,36 +59,34 @@ function serverExists (serverId) {
 			console.log(err);
 			return false;
 		} else {
-			console.log("Check for columns");
-			for (row of res.rows) {
-				console.log(row.column_name);
-			}
 			if (res.rows.length === 0) {
-				console.log("idk")
+				return false;
 			} else {
 				console.log("SCHEMA exists")
 			}
 		}
-	})
+	})*/
 	console.log("Type of serverId");
 	console.log(typeof(serverId));
+	let retValue = false;
 	client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
 			console.trace();
 			console.log(err);
-			return false;
+			retValue = false;
 		} else {
 			if (res.rows.length !== 0) {
-				console.log("Server with id " + serverId + "exists!");
-				return true;
+				console.log("Server with id " + serverId + " exists!");
+				retValue = true;
 			} else {
 				console.log("Server with id " + serverId + " does not exist!");
 				addServer(serverId);
-				return false;
+				retValue = false;
 			}
 		}
 	});
+	return retValue;
 }
 
 
