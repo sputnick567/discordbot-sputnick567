@@ -70,7 +70,9 @@ function serverExists (serverId) {
 			}
 		}
 	})
-	client.query("SELECT * FROM servers.server_info WHERE serverId = " + serverId + ";", (err, res) => {
+	console.log("Type of serverId");
+	console.log(typeof(serverId));
+	client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
 			console.trace();
