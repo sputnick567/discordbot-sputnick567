@@ -34,7 +34,7 @@ function init () {
 			console.log(res);
 		}
 	});
-	client.query("DROP TABLE servers.server_info");
+	//client.query("DROP TABLE servers.server_info");
 	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480))", (err, res) => {
 	
 		//function with param err and res
@@ -51,7 +51,7 @@ function init () {
 }
 
 function serverExists (serverId) {
-	/*console.log("Checking for columns!");
+	console.log("Checking for columns!");
 	client.query("SELECT * FROM information_schema.columns WHERE table_schema = 'servers'AND table_name = 'server_info';", (err ,res) =>  {
 		if (err) {
 			someError();
@@ -60,15 +60,16 @@ function serverExists (serverId) {
 			return false;
 		} else {
 			console.log("Check for columns");
-			console.log(res.rows);
-			console.log(res);
+			for (row of res.rows) {
+				console.log(row.column_name);
+			}
 			if (res.rows.length === 0) {
 				console.log("idk")
 			} else {
 				console.log("SCHEMA exists")
 			}
 		}
-	})*/
+	})
 	client.query("SELECT * FROM servers.server_info WHERE serverId = " + serverId + ";", (err, res) => {
 		if (err) {
 			someError();
