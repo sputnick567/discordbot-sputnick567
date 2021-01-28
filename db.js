@@ -86,6 +86,7 @@ function serverExists (serverId) {
 			}
 		}
 	});
+	console.log(retValue);
 	return retValue;
 }
 
