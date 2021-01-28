@@ -121,7 +121,7 @@ function addServer (serverId) {
 		}
 	});*/
 	console.log("Adding server with id " + serverId);
-	let qQuery = "INSERT INTO servers.server_info VALUES (?)"
+	let qQuery = "INSERT INTO servers.server_info VALUES (?);"
 	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
 	console.log(qQuery);	
 	client.query(qQuery, val, (err, res) => {
