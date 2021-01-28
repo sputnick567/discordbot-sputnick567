@@ -69,6 +69,8 @@ function serverExists (serverId) {
 	console.log("Type of serverId");
 	console.log(typeof(serverId));
 	let retValue = false;
+	var res = client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';";
+	console.log(res);
 	client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
