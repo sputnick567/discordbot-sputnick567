@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 const defaultPrefix = "!";
-const defaultCommands = ["test", "help", "random"];
+const defaultCommands = ['test', 'help', 'random'];
 const defaultWelcomeMessage = '<name><c> welcome to the server!';
 //<c> = ,
 String.prototype.format = function() {
@@ -123,9 +123,9 @@ function addServer (serverId) {
 	console.log("Adding server with id " + serverId);
 	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4);"
 	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
-	let test = "INSERT INTO servers.server_info VALUES ($1, $2, $3," + JSON.stringify(defaultCommands) + ");"
+	//let test = "INSERT INTO servers.server_info VALUES ($1, $2, $3, '["test", "help", "random"]');"
 	console.log(qQuery);
-	console.log(test);
+	//console.log(test);
 	client.query(qQuery, val, (err, res) => {
 															//serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480)
 		if (err) {
