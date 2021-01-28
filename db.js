@@ -34,7 +34,7 @@ function init () {
 			console.log(res);
 		}
 	});
-	//client.query("DROP TABLE server_info");
+	client.query("DROP TABLE servers.server_info");
 	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480))", (err, res) => {
 	
 		//function with param err and res 
