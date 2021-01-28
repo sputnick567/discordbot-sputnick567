@@ -140,7 +140,7 @@ function addServer (serverId) {
 	});*/
 	console.log("Adding server with id " + serverId);
 	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4);"
-	let val = [String(serverId), defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
+	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
 	//let test = "INSERT INTO servers.server_info VALUES ($1, $2, $3, '["test", "help", "random"]');"
 	console.log(qQuery);
 	//console.log(test);
