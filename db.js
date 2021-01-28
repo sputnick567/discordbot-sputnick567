@@ -110,7 +110,8 @@ function getCommands(serverId) {
 
 function getPrefix (serverId) {
 	console.log("serching for prefix!");
-	let a = client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = '" + serverId + "';", (err, res) => {
+	console.log(serverExists(serverId));
+	client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
 			console.trace();
@@ -124,7 +125,6 @@ function getPrefix (serverId) {
 			return null;
 		}
 	});
-	console.log(a);
 
 }
 
