@@ -110,7 +110,7 @@ function someError() {
 }
 
 function addServer (serverId) {
-	client.query("SELECT pg_is_in_recovery();", (err, res) => {
+	/*client.query("SELECT pg_is_in_recovery();", (err, res) => {
 		if (err) {
 			someError();
 			console.trace();
@@ -119,11 +119,12 @@ function addServer (serverId) {
 		} else {
 			console.log(res);
 		}
-	});
+	});*/
 	console.log("Adding server with id " + serverId);
-	let qQuery = "INSERT INTO servers.server_info VALUES ({0}, {1}, {2}, {3})".format(serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands));
+	let qQuery = "INSERT INTO servers.server_info VALUES (?)"
+	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
 	console.log(qQuery);	
-	client.query(qQuery, (err, res) => {
+	client.query(qQuery, val, (err, res) => {
 															//serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480)
 		if (err) {
 			someError();
