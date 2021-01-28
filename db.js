@@ -109,7 +109,7 @@ function getCommands(serverId) {
 }
 
 function getPrefix (serverId) {
-	console.log(typeof(serverId));
+	console.log("serching for prefix!");
 	client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
