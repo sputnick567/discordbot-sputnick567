@@ -51,6 +51,34 @@ function init () {
 }
 
 function serverExists (serverId) {
+	console.log("Checking if SCHEMA exists!");
+	client.query("SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'servers';", (err ,res) =>  {
+		if (err) {
+			someError();
+			console.trace();
+			console.log(err);
+			return false;
+		} else {
+			console.log("Check if schema exists");
+			console.log(res.rows);
+			if (res.rows.length === 0) {
+				console.log("SCHEMA doesnt exist --> creating it!");
+					client.query("CREATE SCHEMA IF NOT EXISTS servers", (err, res) => {
+				if (err) {
+					someError()
+					console.trace();
+					console.log(err);
+					
+				} else {
+					console.log("Result of CREATE SCHEMA servers");
+					console.log(res);
+				}
+	});
+			} else {
+				console.log("SCHEMA exists")
+			}
+		}
+	})
 	client.query("SELECT * FROM servers.server_info WHERE serverId = " + serverId + ";", (err, res) => {
 		if (err) {
 			someError();
@@ -62,7 +90,7 @@ function serverExists (serverId) {
 				console.log("Server with id " + serverId + "exists!");
 				return true;
 			} else {
-				console.log("Server with id " + serverId + "does not exist!");
+				console.log("Server with id " + serverId + " does not exist!");
 				addServer(serverId);
 				return false;
 			}
