@@ -34,7 +34,7 @@ function init () {
 			console.log(res);
 		}
 	});
-	client.query("DROP TABLE servers.server_info");
+	//client.query("DROP TABLE servers.server_info");
 	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID int, commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480))", (err, res) => {
 	
 		//function with param err and res 
@@ -51,7 +51,7 @@ function init () {
 }
 
 function serverExists (serverId) {
-	console.log("Checking for columns!");
+	/*console.log("Checking for columns!");
 	client.query("SELECT * FROM information_schema.columns WHERE table_schema = 'servers'AND table_name = 'server_info';", (err ,res) =>  {
 		if (err) {
 			someError();
@@ -68,7 +68,7 @@ function serverExists (serverId) {
 				console.log("SCHEMA exists")
 			}
 		}
-	})
+	})*/
 	client.query("SELECT * FROM servers.server_info WHERE serverId = " + serverId + ";", (err, res) => {
 		if (err) {
 			someError();
@@ -76,7 +76,7 @@ function serverExists (serverId) {
 			console.log(err);
 			return false;
 		} else {
-			if (res.rows.length != 0) {
+			if (res.rows.length !== 0) {
 				console.log("Server with id " + serverId + "exists!");
 				return true;
 			} else {
@@ -140,7 +140,7 @@ function addServer (serverId) {
 	});*/
 	console.log("Adding server with id " + serverId);
 	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4);"
-	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
+	let val = [String(serverId), defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
 	//let test = "INSERT INTO servers.server_info VALUES ($1, $2, $3, '["test", "help", "random"]');"
 	console.log(qQuery);
 	//console.log(test);
