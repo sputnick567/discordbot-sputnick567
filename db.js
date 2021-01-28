@@ -3,13 +3,7 @@ const defaultPrefix = "!";
 const defaultCommands = ['test', 'help', 'random'];
 const defaultWelcomeMessage = '<name><c> welcome to the server!';
 //<c> = ,
-String.prototype.format = function() {
-	a = this;
-	for (k in arguments) {
-		a = a.replace("{" + k + "}", arguments[k])
-	}
-	return a
-}
+var qResult = false;
 
 
 const client = new Client({
@@ -68,28 +62,25 @@ function serverExists (serverId) {
 	})*/
 	console.log("Type of serverId");
 	console.log(typeof(serverId));
-	let retValue = false;
-	client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';").then(res => console.log(res.rows[0]));
-	console.log(res);
 	client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
 			console.trace();
 			console.log(err);
-			retValue = false;
+			qResult = false;
 		} else {
 			if (res.rows.length !== 0) {
 				console.log("Server with id " + serverId + " exists!");
-				retValue = true;
+				qResult = true;
 			} else {
 				console.log("Server with id " + serverId + " does not exist!");
 				addServer(serverId);
-				retValue = false;
+				qResult = false;
 			}
 		}
 	});
-	console.log(retValue);
-	return retValue;
+	console.log(qResult);
+	return qResult;
 }
 
 
