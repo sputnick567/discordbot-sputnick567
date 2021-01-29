@@ -62,6 +62,7 @@ function serverExists (serverId) {
 	})*/
 	console.log("Type of serverId");
 	console.log(typeof(serverId));
+	qResult = false;
 	client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
@@ -103,20 +104,22 @@ function getCommands(serverId) {
 function getPrefix (serverId) {
 	console.log("serching for prefix!");
 	console.log(serverExists(serverId));
+	qResult = null;
 	client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = '" + serverId + "';", (err, res) => {
 		if (err) {
 			someError();
 			console.trace();
 			console.log(err);
-			return null;
+			qResult = null;
 		} else if (serverExists(serverId)) {
 			console.log("Got prefix")
 			console.log(res.rows);
-			return res.rows[0].commandPrefix;
+			qResult = res.rows[0].commandPrefix;
 		} else {
-			return null;
+			qResult = null;
 		}
 	});
+	return qResult;
 
 }
 
