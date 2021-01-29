@@ -71,7 +71,9 @@ function serverExists (serverId) {
 		} else {
 			if (res.rows.length !== 0) {
 				console.log("Server with id " + serverId + " exists!");
+				console.log("1 qResult = " + qResult);
 				qResult = true;
+				console.log("2 qResult = " + qResult);
 			} else {
 				console.log("Server with id " + serverId + " does not exist!");
 				addServer(serverId);
