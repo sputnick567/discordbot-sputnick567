@@ -112,7 +112,7 @@ function getPrefix (serverId) {
 		} else if (serverExists(serverId)) {
 			console.log("Got prefix")
 			console.log(res.rows);
-			return res.rows[0];
+			return res.rows[0].commandPrefix;
 		} else {
 			return null;
 		}
