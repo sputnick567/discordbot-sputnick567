@@ -60,10 +60,9 @@ function serverExists (serverId) {
 			}
 		}
 	})*/
-	console.log("Type of serverId");
-	console.log(typeof(serverId));
 	qResult = false;
 	client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';", (err, res) => {
+		console.log("Inline function was called serverExists");
 		if (err) {
 			someError();
 			console.trace();
@@ -80,6 +79,7 @@ function serverExists (serverId) {
 			}
 		}
 	});
+	console.log("returning server exists:");
 	console.log(qResult);
 	return qResult;
 }
