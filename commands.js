@@ -11,7 +11,7 @@ function help  (message) {
 		console.log("No prefix --> Error");
 
 	} else {
-		console.log("Message prefix + " message.content[0]);
+		console.log("Message prefix + " + message.content[0]);
 		if (message.content[0] === prefix) {
 			var args = getArgs(message);
 			if (args.length === 0) {
