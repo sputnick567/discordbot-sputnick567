@@ -13,7 +13,7 @@ const client = new Client({
 	  }
 });
 
-export function init () {
+function init () {
 	
 	client.connect();
 	//shema = wie neuer ordner
@@ -45,7 +45,7 @@ export function init () {
 
 }
 
-export async function serverExists (serverId) {
+async function serverExists (serverId) {
 
 	let res = await client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';");
 	if (res.rows.length === 0) {
@@ -56,7 +56,7 @@ export async function serverExists (serverId) {
 }
 
 
-export async function getCommands(serverId) {
+async function getCommands(serverId) {
 	let res = await client.query("SELECT commands FROM servers.server_info WHERE serverID = " + serverId);
 	if (res.rows.length === 0) {
 		if (serverExists(serverId)) {
@@ -70,7 +70,7 @@ export async function getCommands(serverId) {
 
 }
 
-export async function getPrefix (serverId) {
+async function getPrefix (serverId) {
 	
 	let res = await client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = '" + serverId + "';");
 	if (res.rows.length === 0) {
@@ -110,3 +110,8 @@ export async function addServer (serverId) {
 } 
 
 
+module.exports.init = init;
+module.exports.getCommands = getCommands;
+module.exports.getPrefix = getPrefix;
+module.exports.serverExists = serverExists;
+module.exports.addServer = addServer;
