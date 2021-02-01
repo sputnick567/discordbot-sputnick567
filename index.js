@@ -32,8 +32,8 @@ function report (message) {
 
 
 
-client.on("message", message => {
-	const prefix = cmdMngr.db.getPrefix(message.guild.id);
+client.on("message", async message => {
+	const prefix = await cmdMngr.db.getPrefix(message.guild.id);
 	console.log("Some message: " + message.content + " with pref " + prefix);
     if (message.content[0] === prefix) {
         const command = message.content.split(" ")[0].substr(1);
