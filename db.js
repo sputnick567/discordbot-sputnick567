@@ -80,7 +80,7 @@ async function getPrefix (serverId) {
 			return defaultCommands;
 		}
 	} else {
-		return JSON.parse(res.rows.commandPrefix);
+		return res.rows.commandPrefix;
 	}
 
 }
