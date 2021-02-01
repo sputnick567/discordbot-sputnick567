@@ -89,7 +89,7 @@ function someError() {
 	console.log("Some error occured!");
 }
 
-export async function addServer (serverId) {
+async function addServer (serverId) {
 	/*client.query("SELECT pg_is_in_recovery();", (err, res) => {
 		if (err) {
 			someError();
