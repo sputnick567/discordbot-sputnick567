@@ -83,7 +83,9 @@ function serverExists (serverId) {
 		}
 	});
 	*/
-	console.log(await client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';"));
+	console.log(
+		await client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';")
+	);
 	console.log("returning server exists:");
 	console.log(qResult);
 	return qResult;
