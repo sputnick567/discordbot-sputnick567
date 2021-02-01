@@ -67,7 +67,7 @@ async function getCommands(serverId) {
 			return defaultCommands;
 		}
 	} else {
-		return JSON.parse(res.rows[0].commands);
+		return JSON.parse(res.rows[0][cmds]);
 	}
 
 }
@@ -83,8 +83,7 @@ async function getPrefix (serverId) {
 			return defaultCommands;
 		}
 	} else {
-		console.log(res.rows[0][cmdPref]);
-		return res.rows[0].commandprefix;
+		return res.rows[0][cmdPref];
 	}
 
 }
