@@ -44,7 +44,7 @@ function init () {
 
 }
 
-function serverExists (serverId) {
+async function serverExists (serverId) {
 	/*console.log("Checking for columns!");
 	client.query("SELECT * FROM information_schema.columns WHERE table_schema = 'servers'AND table_name = 'server_info';", (err ,res) =>  {
 		if (err) {
@@ -86,7 +86,7 @@ function serverExists (serverId) {
 	let query = "SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';";
 	console.log(query)
 	console.log(
-		await client.query(query)
+		(await client.query(query)
 	);
 	console.log("returning server exists:");
 	console.log(qResult);
