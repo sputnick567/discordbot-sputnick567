@@ -65,7 +65,7 @@ async function getCommands(serverId) {
 			return defaultCommands;
 		}
 	} else {
-		return JSON.parse(res.rows.commands);
+		return JSON.parse(res.rows.[0].commands);
 	}
 
 }
@@ -81,7 +81,7 @@ async function getPrefix (serverId) {
 			return defaultCommands;
 		}
 	} else {
-		return res.rows.commandprefix;
+		return res.rows.[0].commandprefix;
 	}
 
 }
