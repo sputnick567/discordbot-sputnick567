@@ -83,6 +83,7 @@ async function getPrefix (serverId) {
 			return defaultCommands;
 		}
 	} else {
+		console.log(res.rows[0][cmdPref]);
 		return res.rows[0].commandprefix;
 	}
 
