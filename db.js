@@ -5,6 +5,8 @@ const defaultWelcomeMessage = '<name><c> welcome to the server!';
 //<c> = ,
 var qResult = false;
 
+const cmdPref = "commandprefix";
+const cmds = "commands";
 
 const client = new Client({
 	connectionString: process.env.DATABASE_URL,
@@ -65,7 +67,7 @@ async function getCommands(serverId) {
 			return defaultCommands;
 		}
 	} else {
-		return JSON.parse(res.rows[0][commands]);
+		return JSON.parse(res.rows[0][cmd]);
 	}
 
 }
@@ -81,7 +83,7 @@ async function getPrefix (serverId) {
 			return defaultCommands;
 		}
 	} else {
-		return res.rows[0][commandprefix];
+		return res.rows[0][cmdPref];
 	}
 
 }
