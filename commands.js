@@ -14,9 +14,7 @@ function randomInt(min, max) {
 		throw "Values are same";
 	}
 	let s = max - min + 1;
-	let num = Math.floor(Math.random() * s) + min;
-	console.log(num);
-	return num;
+	return Math.floor(Math.random() * s) + min;
 }
 
 function help  (message) {
@@ -116,6 +114,9 @@ function random(message) {
 		var max = parseInt(args[1], 10);
 		if (isNaN(min) || isNaN(max)) {
 			invalidArgs(message);
+			console.log("min or max are NaN")
+			console.log(max);
+			console.log(min);
 			return;
 		}
 		try {
