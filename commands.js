@@ -17,8 +17,8 @@ function randomInt(min, max) {
 	return Math.floor(Math.random() * s) + min;
 }
 
-function help  (message) {
-
+async function help  (message) {
+	var prefix = serverMngr.getPrefix(message.guild.id);
 	var args = getArgs(message);
 	if (args.length === 0) {
 		console.log("normal help!");
