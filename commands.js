@@ -4,6 +4,18 @@ const serverMngr = require("./db.js");
 const argsInfo = "<arg> are optional, [arg] are required!";
 
 serverMngr.init();
+function randomInt(min, max) {
+	if (max < min) {
+		let temp = min;
+		min = max;
+		max = temp;
+	}
+	if (max === min) {
+		throw "Values are same";
+	}
+	let s = max - min + 1;
+	return Math.floor(Math.random() * s) + min;
+}
 
 function help  (message) {
 	prefix = serverMngr.getPrefix(message.guild.id);
@@ -85,17 +97,48 @@ function ping (message) {
 }
 
 function random(message) {
-    const number = Math.random(); // generates a random number
-    message.channel.send(number.toString()); // sends a message to the channel with the number
+	const args = getArgs(message);
+	if (args.length === 0) {
+	    const number = Math.random(); // generates a random number
+	    message.channel.send(number.toString()); // sends a message to the channel with the number
+	} else if (args.length === 1) {
+		var num = parseInt(args[0], 10);
+		if (isNaN(num)) {
+			invalidArgs(message);
+			return;
+		}
+		message.channel.send(randomInt(1, num));
+
+	} else if (args.legnth === 2) {
+		var min = parseInt(args[0], 10);
+		var max = parseInt(args[1], 10);
+		if (isNaN(min) || isNaN(max)) {
+			invalidArgs(message);
+			return;
+		}
+		try {
+			let num = randomInt(min, max);
+			message.channel.send(num);
+		} catch (e) {
+			invalidArgs(message);
+			message.channel.send(e);
+		}
+	} else if (args.length === 3){
+		//mit abstand
+	} else {
+		invalidArgs(message);
+	}
+
 }
 
 function invalidArgs (message) {
+	ping(message);
 	message.channel.send("Invalid arguments! use !help <cmd> to get help to this command")
 }
 
 
 //name, [function, usage, description, show in !help]
-commands.set("random", [random, "random", "returns a random number",{"random": "returns a random number between 0 and 1", "random <x>": "returns a random whole number between 1 and x"}, true]);
+commands.set("random", [random, "random", "returns a random number",{"random": "returns a random number between 0 and 1", "random <x>": "returns a random whole number between 1 and x (included)", "random <x> <y>": "returns a whole number between x and y (both included)"}, true]);
 commands.set("help", [help, "help <cmdName>", "shows list of all commands", {"help":"returns list of all commands", "help <cmdName>": "gives info to cmd"}, true]);
 commands.set("test", [test, "","test command","", false])
 

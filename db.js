@@ -107,7 +107,6 @@ async function addServer (serverId) {
 	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4);"
 	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
 	//let test = "INSERT INTO servers.server_info VALUES ($1, $2, $3, '["test", "help", "random"]');"
-	console.log(qQuery);
 	//console.log(test);
 	await client.query(qQuery, val);
 } 
