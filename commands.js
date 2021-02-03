@@ -18,53 +18,40 @@ function randomInt(min, max) {
 }
 
 function help  (message) {
-	prefix = serverMngr.getPrefix(message.guild.id);
-	if (prefix === null) {
-		console.log("No prefix --> Error");
 
-	} else {
-		console.log("Message prefix + " + message.content[0]);
-		console.log(prefix);
-		if (message.content[0] === prefix) {
-			console.log("help");
-			var args = getArgs(message);
-			if (args.length === 0) {
-				console.log("normal help!");
-				var embed = new Discord.MessageEmbed().setColor('#0099ff')
-				.setTitle('Sputnick567 bot help').setDescription('All available commands').setFooter(argsInfo);
-				var keys = commands.keys();
-				//console.log(message.guild.roles.cache.find(role => role.name === "Rolename"));
-
-
-				
-				
-				for (var key of keys) {
-					if (commands.get(key)[4]) {
-					embed.addField(prefix + commands.get(key)[1], commands.get(key)[2], false);
-					}
-				}
-				ping(message);
-				message.channel.send(embed);
-			} else if (args.length === 1){
-				if (commands.has(args[0])) {
-					if (commands.get(args[0])[4]) {
-						var cmdInfo = commands.get(args[0]);
-						var embed = new Discord.MessageEmbed();
-						embed.setColor("#23d6a0").setFooter(argsInfo).setTitle(args[0]).setDescription("Info to command " + args[0]);
-						for (var key of Object.keys(cmdInfo[3])) {
-							embed.addField(key, cmdInfo[3][key], false);
-						}
-						message.channel.send(embed);
-					} else {
-						message.channel.send("No such command: " + args[0]);
-					}
-				} else {
-					message.channel.send("No such command: " + args[0]);
-				}
-			} else {
-				invalidArgs(message);
+	var args = getArgs(message);
+	if (args.length === 0) {
+		console.log("normal help!");
+		var embed = new Discord.MessageEmbed().setColor('#0099ff')
+		.setTitle('Sputnick567 bot help').setDescription('All available commands').setFooter(argsInfo);
+		var keys = commands.keys();
+		//console.log(message.guild.roles.cache.find(role => role.name === "Rolename"));
+		
+		for (var key of keys) {
+			if (commands.get(key)[4]) {
+			embed.addField(prefix + commands.get(key)[1], commands.get(key)[2], false);
 			}
 		}
+		ping(message);
+		message.channel.send(embed);
+	} else if (args.length === 1){
+		if (commands.has(args[0])) {
+			if (commands.get(args[0])[4]) {
+				var cmdInfo = commands.get(args[0]);
+				var embed = new Discord.MessageEmbed();
+				embed.setColor("#23d6a0").setFooter(argsInfo).setTitle(args[0]).setDescription("Info to command " + args[0]);
+				for (var key of Object.keys(cmdInfo[3])) {
+					embed.addField(key, cmdInfo[3][key], false);
+				}
+				message.channel.send(embed);
+			} else {
+				message.channel.send("No such command: " + args[0]);
+			}
+		} else {
+			message.channel.send("No such command: " + args[0]);
+		}
+	} else {
+		invalidArgs(message);
 	}
 }
 
