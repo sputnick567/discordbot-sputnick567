@@ -18,7 +18,7 @@ function randomInt(min, max) {
 }
 
 async function help  (message) {
-	var prefix = serverMngr.getPrefix(message.guild.id);
+	var prefix = await serverMngr.getPrefix(message.guild.id);
 	var args = getArgs(message);
 	if (args.length === 0) {
 		console.log("normal help!");
