@@ -13,6 +13,8 @@ function randomInt(min, max) {
 	if (max === min) {
 		throw "Values are same";
 	}
+	console.log(max);
+	console.log(min);
 	let s = max - min + 1;
 	return Math.floor(Math.random() * s) + min;
 }
