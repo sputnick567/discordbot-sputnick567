@@ -24,6 +24,7 @@ function help  (message) {
 
 	} else {
 		console.log("Message prefix + " + message.content[0]);
+		console.log(prefix);
 		if (message.content[0] === prefix) {
 			console.log("help");
 			var args = getArgs(message);
