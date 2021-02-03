@@ -109,7 +109,7 @@ function random(message) {
 		}
 		message.channel.send(randomInt(1, num));
 
-	} else if (args.legnth === 2) {
+	} else if (args.length === 2) {
 		var min = parseInt(args[0], 10);
 		var max = parseInt(args[1], 10);
 		if (isNaN(min) || isNaN(max)) {
