@@ -27,6 +27,7 @@ function help  (message) {
 		if (message.content[0] === prefix) {
 			var args = getArgs(message);
 			if (args.length === 0) {
+				console.log("normal help!");
 				var embed = new Discord.MessageEmbed().setColor('#0099ff')
 				.setTitle('Sputnick567 bot help').setDescription('All available commands').setFooter(argsInfo);
 				var keys = commands.keys();
