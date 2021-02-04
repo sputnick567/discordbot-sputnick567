@@ -34,7 +34,7 @@ function init () {
 		}
 	});
 	client.query("DROP TABLE servers.server_info");
-	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(50), commands varchar(20480)), modrank varchar(20), adminrank varchar(20);", (err, res) => {
+	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(50), commands varchar(20480), modrank varchar(20), adminrank varchar(20));", (err, res) => {
 	
 		//function with param err and res
 		if (err) {
