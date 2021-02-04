@@ -15,9 +15,7 @@ async function isAdminSender (message) {
 }
 
 function admin (message, args) {
-	//add
-	//remove
-	//make sure it works with the owner
+	// !admin 
 
 }
 
