@@ -84,6 +84,7 @@ async function getPrefix (serverId) {
 			return null
 		} else {
 			addServer(serverId);
+			console.log("Returning default prefix!");
 			return defaultPrefix;
 		}
 	} else {
