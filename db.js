@@ -80,8 +80,7 @@ async function getPrefix (serverId) {
 	let res = await client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = '" + serverId + "';");
 	console.log(res.rows);
 	if (res.rows.length === 0) {
-		let s = serverExists(serverId);
-		console.log(s);
+		let s = await serverExists(serverId);
 		if (s) {
 			console.log("It thinks the server does exist!");
 			return null
