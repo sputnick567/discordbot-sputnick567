@@ -81,6 +81,7 @@ async function getPrefix (serverId) {
 	console.log(res.rows);
 	if (res.rows.length === 0) {
 		if (serverExists(serverId)) {
+			console.log("It thinks the server does exist!");
 			return null
 		} else {
 			addServer(serverId);
