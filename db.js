@@ -75,7 +75,7 @@ async function getCommands(serverId) {
 async function getPrefix (serverId) {
 	
 	let res = await client.query("SELECT commandPrefix FROM servers.server_info WHERE serverID = '" + serverId + "';");
-	console.log(res.rows[0]);
+	console.log(res.rows);
 	if (res.rows.length === 0) {
 		if (serverExists(serverId)) {
 			return null
