@@ -2,6 +2,11 @@ const commands = new Map();
 const Discord = require("discord.js");
 const serverMngr = require("./db.js");
 const argsInfo = "<arg> are optional, [arg] are required!";
+const modCmd = require("./modcommands.js");
+const adminCmd = require("./admincommands.js");
+
+
+
 
 serverMngr.init();
 function randomInt(min, max) {
@@ -75,11 +80,7 @@ function test (message, args) {
 	message.channel.send(exampleEmbed);
 }
 
-function getArgs (message) {
-	var args = message.content.split(" ");
-	args.shift();
-	return args;
-}
+
 
 function ping (message) {
 	message.channel.send("<@!" + message.author.id + ">,");
@@ -128,11 +129,21 @@ function invalidArgs (message) {
 }
 
 
-//name, [function, usage, description, show in !help]
+
+//name, [function, usage, description, detailDescript, show in !help]
 commands.set("random", [random, "random", "returns a random number",{"random": "returns a random number between 0 and 1", "random <x>": "returns a random whole number between 1 and x (included)", "random <x> <y>": "returns a whole number between x and y (both included)"}, true]);
 commands.set("help", [help, "help <cmdName>", "shows list of all commands", {"help":"returns list of all commands", "help <cmdName>": "gives info to cmd"}, true]);
 commands.set("test", [test, "","test command","", false])
 
+//adding mod commands
+/*Array.from(modCmd.modCmds.keys()).map(key => {
+	commands.set(key, modCmd.modCmds.get(key));
+});*/
+
+//adding admin commands
+Array.from(adminCmd.admindCmds.keys()).map(key => {
+	commands.set(key, adminCmd.adminCmds.get(key));
+});
 
 module.exports.commands = commands;
 module.exports.db = serverMngr;

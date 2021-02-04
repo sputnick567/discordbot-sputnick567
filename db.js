@@ -8,6 +8,9 @@ var qResult = false;
 const cmdPref = "commandprefix";
 const cmds = "commands";
 
+const adminRank = "adminrank";
+const modRank = "modrank";
+
 const client = new Client({
 	connectionString: process.env.DATABASE_URL,
 	ssl: {
@@ -31,8 +34,8 @@ function init () {
 
 		}
 	});
-	//client.query("DROP TABLE servers.server_info");
-	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(10), welcomeMessage varchar(50), commands varchar(20480))", (err, res) => {
+	client.query("DROP TABLE servers.server_info");
+	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(50), commands varchar(20480)), modrank varchar(20), amdinrank varchar(20)", (err, res) => {
 	
 		//function with param err and res
 		if (err) {
@@ -46,13 +49,40 @@ function init () {
 	});
 
 }
+async function getModRank (serverId) {
+	if (serverExists(serverId)) {
+		let res = await client.query("SELECT modrank FROM servers.server_info WHERE serverId = '" + serverId + "';");
+		return res.rows[0][modRank];
+	} else {
+		return "";
+	}
+}
+
+async function setPrefix (serverId, prefix) {
+	if (serverExists(serverId)) {
+		let res = await client.query("UPDATE servers.server_info SET commandprefix = '" + prefix + "' WHERE serverID = '" + serverId + "';");
+		return true;
+	} else {
+		return null;
+	}
+}
+
+async function getAdminRank (serverId) {
+	if (serverExists(serverId)) {
+		let res = await client.query("SELECT amdinrank FROM servers.server_info WHERE serverID = '" + serverId + "';");
+		return res.rows[0][adminRank];
+	} else {
+		return "";
+	}
+}
 
 async function serverExists (serverId) {
 	console.log("Checking if server exists: " + serverId);
 	let res = await client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';");
 	console.log(res.rows);
 	if (res.rows.length === 0) {
-		console.log("Server doesn't exist!");
+		console.log("Server doesn't exist! --> Adding server");
+		await addServer(serverId);
 		return false;
 	} else {
 		console.log("Server exists!");
@@ -85,7 +115,6 @@ async function getPrefix (serverId) {
 			console.log("It thinks the server does exist!");
 			return null
 		} else {
-			addServer(serverId);
 			console.log("Returning default prefix!");
 			return defaultPrefix;
 		}
@@ -111,8 +140,8 @@ async function addServer (serverId) {
 		}
 	});*/
 	console.log("Adding server with id " + serverId);
-	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4);"
-	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
+	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4, $5, $6);"
+	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands), "", ""];
 	//let test = "INSERT INTO servers.server_info VALUES ($1, $2, $3, '["test", "help", "random"]');"
 	//console.log(test);
 	await client.query(qQuery, val);
@@ -124,3 +153,5 @@ module.exports.getCommands = getCommands;
 module.exports.getPrefix = getPrefix;
 module.exports.serverExists = serverExists;
 module.exports.addServer = addServer;
+module.exports.getAdminRank = getAdminRank;
+module.exports.getModRank = getModRank;
