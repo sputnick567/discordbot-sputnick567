@@ -3,7 +3,7 @@ const adminCmds = new Map();
 
 async function isAdminSender (message) {
 	let adminRole = await database.getAdminRank(message.guild.id);
-	if adminRole === "" {
+	if (adminRole === "") {
 		message.channel.send("No admin role specified! Please ask the owner to do so!");
 		return null;
 	}
