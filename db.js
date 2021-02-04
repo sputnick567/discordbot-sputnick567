@@ -83,7 +83,8 @@ async function getPrefix (serverId) {
 		if (serverExists(serverId)) {
 			return null
 		} else {
-			return defaultCommands;
+			addServer(serverId);
+			return defaultPrefix;
 		}
 	} else {
 		return res.rows[0][cmdPref];
