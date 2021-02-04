@@ -141,7 +141,7 @@ commands.set("test", [test, "","test command","", false])
 });*/
 
 //adding admin commands
-Array.from(adminCmd.admindCmds.keys()).map(key => {
+Array.from(adminCmd.adminCmds.keys()).map(key => {
 	commands.set(key, adminCmd.adminCmds.get(key));
 });
 
