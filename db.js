@@ -48,8 +48,9 @@ function init () {
 }
 
 async function serverExists (serverId) {
-
+	console.log("Checking if server exists: " + serverId);
 	let res = await client.query("SELECT * FROM servers.server_info WHERE serverId = '" + serverId + "';");
+	console.log(res.rows)
 	if (res.rows.length === 0) {
 		return false;
 	} else {
