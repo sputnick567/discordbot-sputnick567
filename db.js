@@ -24,9 +24,8 @@ function init () {
 	//shema = wie neuer ordner
 	client.query("CREATE SCHEMA IF NOT EXISTS servers", (err, res) => {
 		if (err) {
-			someError()
+			someError(err)
 			console.trace();
-			console.log(err);
 			
 		} else {
 			//console.log("Result of CREATE SCHEMA servers");
@@ -39,7 +38,7 @@ function init () {
 	
 		//function with param err and res
 		if (err) {
-			someError();
+			someError(err);
 			console.trace();
 		} else {
 
@@ -124,8 +123,9 @@ async function getPrefix (serverId) {
 
 }
 
-function someError() {
+function someError(err) {
 	console.log("Some error occured!");
+	console.log(err);
 }
 
 async function addServer (serverId) {
