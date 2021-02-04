@@ -17,9 +17,8 @@ function randomInt(min, max) {
 	return Math.floor(Math.random() * s) + min;
 }
 
-async function help  (message) {
+async function help  (message, args) {
 	var prefix = await serverMngr.getPrefix(message.guild.id);
-	var args = getArgs(message);
 	if (args.length === 0) {
 		console.log("normal help!");
 		var embed = new Discord.MessageEmbed().setColor('#0099ff')
@@ -55,7 +54,7 @@ async function help  (message) {
 	}
 }
 
-function test (message) {
+function test (message, args) {
 	const exampleEmbed = new Discord.MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle('Sputnick567 bot help')
@@ -86,8 +85,7 @@ function ping (message) {
 	message.channel.send("<@!" + message.author.id + ">,");
 }
 
-function random(message) {
-	const args = getArgs(message);
+function random(message, args) {
 	if (args.length === 0) {
 	    const number = Math.random(); // generates a random number
 	    message.channel.send(number.toString()); // sends a message to the channel with the number

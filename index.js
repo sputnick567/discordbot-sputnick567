@@ -16,16 +16,11 @@ const commands = cmdMngr.commands;
 
 
 
-
-
-function modhelp (message) {
-
+function getArgs (message) {
+	var args = message.content.split(" ");
+	args.shift();
+	return args;
 }
-
-function report (message) {
-
-}
-
 
 
 
@@ -40,7 +35,7 @@ client.on("message", async message => {
          // gets the command name
         console.log("Command " + command + " was executed!");
         if (commands.has(command)) { // checks if the map contains the command
-            commands.get(command)[0](message); // runs the command
+            commands.get(command)[0](message, getArgs(message)); // runs the command
         }  
 
         else {
