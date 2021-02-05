@@ -25,8 +25,10 @@ function randomInt(min, max) {
 async function help  (message, args) {
 	var prefix = await serverMngr.getPrefix(message.guild.id);
 	const guild = message.guild;
+
 	console.log("Owner!");
 	console.log(guild.ownerID);
+	console.log(guild.ownerID === message.author.id);
 
 	if (args.length === 0) {
 		console.log("normal help!");
