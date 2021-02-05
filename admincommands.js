@@ -65,6 +65,6 @@ async function setPref (message, args) {
 }
 
 //name, [function, usage, description, detailDescript, show in !help]
-adminCmds.set("setPref", [setPref, "set the prefix for sputnick567-bot on this server!", {"setPref": "set the prefix for sputnick567-bot on this server!"}, true]);
+adminCmds.set("setPref", [setPref, "setPref [prefix]","set the prefix for sputnick567-bot on this server!", {"setPref": "set the prefix for sputnick567-bot on this server!"}, true]);
 
 module.exports.adminCmds = adminCmds;
