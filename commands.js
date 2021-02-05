@@ -24,7 +24,7 @@ function randomInt(min, max) {
 
 async function help  (message, args) {
 	var prefix = await serverMngr.getPrefix(message.guild.id);
-	const guild = message.guild.id;
+	const guild = message.guild;
 	console.log("Owner!");
 	console.log(guild.ownerID);
 
