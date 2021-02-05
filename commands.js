@@ -34,7 +34,9 @@ async function help  (message, args) {
 		//console.log(message.guild.roles.cache.find(role => role.name === "Rolename"));
 		
 		for (var key of keys) {
+			console.log(key);
 			if (commands.get(key)[4]) {
+			console.log(key);
 			embed.addField(prefix + commands.get(key)[1], commands.get(key)[2], false);
 			}
 		}
