@@ -18,7 +18,7 @@ function admin (message, args) {
 	// !admin 
 }
 
-function isOwner (message, args) {
+function isOwner (message) {
 	
 }
 
@@ -36,7 +36,7 @@ async function setPref (message, args) {
 	let isAdmin = await isAdminSender(message);
 	if (isAdmin === null) {
 
-	} else if (isAdmin) {
+	} else if (isAdmin || isOwner(message) === true) {
 		if (args.length === 0) {
 			ping(message);
 			message.channel.send("Please specify a character as prefix!");
