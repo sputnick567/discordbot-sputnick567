@@ -145,6 +145,7 @@ commands.set("test", [test, "","test command","", false])
 //adding admin commands
 console.log("Adding admin commands!");
 Array.from(adminCmd.adminCmds.keys()).map(key => {
+	console.log(key);
 	commands.set(key, adminCmd.adminCmds.get(key));
 });
 
