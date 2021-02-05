@@ -16,7 +16,10 @@ async function isAdminSender (message) {
 
 function admin (message, args) {
 	// !admin 
+}
 
+function isOwner (message, args) {
+	
 }
 
 function ping (message) {

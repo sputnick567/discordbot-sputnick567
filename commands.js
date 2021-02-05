@@ -24,6 +24,10 @@ function randomInt(min, max) {
 
 async function help  (message, args) {
 	var prefix = await serverMngr.getPrefix(message.guild.id);
+	const guild = message.guild.id;
+	console.log(guild.owner);
+	console.log(guild.owner.toString());
+
 	if (args.length === 0) {
 		console.log("normal help!");
 		var embed = new Discord.MessageEmbed().setColor('#0099ff')
