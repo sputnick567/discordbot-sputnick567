@@ -149,5 +149,7 @@ Array.from(adminCmd.adminCmds.keys()).map(key => {
 	commands.set(key, adminCmd.adminCmds.get(key));
 });
 
+console.log(commands);
+
 module.exports.commands = commands;
 module.exports.db = serverMngr;
