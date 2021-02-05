@@ -24,11 +24,7 @@ function randomInt(min, max) {
 
 async function help  (message, args) {
 	var prefix = await serverMngr.getPrefix(message.guild.id);
-	const guild = message.guild;
 
-	console.log("Owner!");
-	console.log(guild.ownerID);
-	console.log(guild.ownerID === message.author.id);
 
 	if (args.length === 0) {
 		console.log("normal help!");
@@ -147,6 +143,7 @@ commands.set("test", [test, "","test command","", false])
 });*/
 
 //adding admin commands
+console.log("Adding admin commands!");
 Array.from(adminCmd.adminCmds.keys()).map(key => {
 	commands.set(key, adminCmd.adminCmds.get(key));
 });

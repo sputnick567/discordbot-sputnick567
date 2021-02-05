@@ -19,7 +19,8 @@ function admin (message, args) {
 }
 
 function isOwner (message) {
-	
+	const guild = message.guild;
+	return guild.ownerID === message.author.id;
 }
 
 function ping (message) {
