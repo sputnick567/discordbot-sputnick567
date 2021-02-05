@@ -26,8 +26,7 @@ async function help  (message, args) {
 	var prefix = await serverMngr.getPrefix(message.guild.id);
 	const guild = message.guild.id;
 	console.log("Owner!");
-	console.log(guild.owner);
-	console.log(guild.owner.toString());
+	console.log(guild.ownerID);
 
 	if (args.length === 0) {
 		console.log("normal help!");
