@@ -155,3 +155,4 @@ module.exports.serverExists = serverExists;
 module.exports.addServer = addServer;
 module.exports.getAdminRank = getAdminRank;
 module.exports.getModRank = getModRank;
+module.exports.setPrefix = setPrefix;
