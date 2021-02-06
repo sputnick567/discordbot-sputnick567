@@ -1,4 +1,4 @@
-
+const database = require("./db.js");
 const adminCmds = new Map();
 
 
