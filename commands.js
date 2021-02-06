@@ -34,9 +34,9 @@ async function help  (message, args) {
 		//console.log(message.guild.roles.cache.find(role => role.name === "Rolename"));
 		
 		for (var key of keys) {
-			console.log(key);
+			//console.log(key);
 			if (commands.get(key)[4]) {
-			console.log(key);
+			//console.log(key);
 			embed.addField(prefix + commands.get(key)[1], commands.get(key)[2], false);
 			}
 		}
@@ -135,7 +135,7 @@ function invalidArgs (message) {
 
 
 //name, [function, usage, description, detailDescript, show in !help]
-commands.set("random", [random, "random", "returns a random number",{"random": "returns a random number between 0 and 1", "random <x>": "returns a random whole number between 1 and x (included)", "random <x> <y>": "returns a whole number between x and y (both included)"}, true]);
+commands.set("random", [random, "random <x> <y>", "returns a random number",{"random": "returns a random number between 0 and 1", "random <x>": "returns a random whole number between 1 and x (included)", "random <x> <y>": "returns a whole number between x and y (both included)"}, true]);
 commands.set("help", [help, "help <cmdName>", "shows list of all commands", {"help":"returns list of all commands", "help <cmdName>": "gives info to cmd"}, true]);
 commands.set("test", [test, "","test command","", false])
 
@@ -147,11 +147,11 @@ commands.set("test", [test, "","test command","", false])
 //adding admin commands
 console.log("Adding admin commands!");
 Array.from(adminCmd.adminCmds.keys()).map(key => {
-	console.log(key);
+	//console.log(key);
 	commands.set(key, adminCmd.adminCmds.get(key));
 });
 
-console.log(commands);
+//console.log(commands);
 
 module.exports.commands = commands;
 module.exports.db = serverMngr;

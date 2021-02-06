@@ -1,18 +1,6 @@
-const database = require("./db.js");
+
 const adminCmds = new Map();
 
-async function isAdminSender (message) {
-	let adminRole = await database.getAdminRank(message.guild.id);
-	if (adminRole === "") {
-		message.channel.send("No admin role specified! Please ask the owner to do so!");
-		return null;
-	}
-	if (message.member.roles.cache.some(role => role.name === adminRole)) {
-		return true;
-	} else {
-		return false;
-	}
-}
 
 function admin (message, args) {
 	// !admin 
@@ -34,10 +22,10 @@ function invalidArgs (message) {
 
 
 async function setPref (message, args) {
-	let isAdmin = await isAdminSender(message);
-	if (isAdmin === null) {
-
-	} else if (isAdmin || isOwner(message) === true) {
+	if (!message.author.hasPermission('MANAGE_GUILD')) {
+		ping(message);
+		message.channel.send("You don't have the permission 'MANAGE_GUILD' to perform this command!");
+	} else {
 		if (args.length === 0) {
 			ping(message);
 			message.channel.send("Please specify a character as prefix!");
@@ -58,9 +46,6 @@ async function setPref (message, args) {
 		} else {
 			invalidArgs(message);
 		}
-	} else {
-		ping(message);
-		message.channel.send("You need the admin role to perform this command!");
 	}
 }
 
