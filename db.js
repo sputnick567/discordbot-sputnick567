@@ -33,7 +33,7 @@ function init () {
 
 		}
 	});
-	client.query("DROP TABLE servers.server_info");
+	//client.query("DROP TABLE servers.server_info");
 	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(50), commands varchar(20480));", (err, res) => {
 	
 		//function with param err and res
@@ -140,8 +140,8 @@ async function addServer (serverId) {
 		}
 	});*/
 	console.log("Adding server with id " + serverId);
-	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4, $5, $6);"
-	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands), "", ""];
+	let qQuery = "INSERT INTO servers.server_info VALUES ($1, $2, $3, $4);"
+	let val = [serverId, defaultPrefix, defaultWelcomeMessage, JSON.stringify(defaultCommands)];
 	//let test = "INSERT INTO servers.server_info VALUES ($1, $2, $3, '["test", "help", "random"]');"
 	//console.log(test);
 	await client.query(qQuery, val);
