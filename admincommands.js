@@ -22,7 +22,7 @@ function invalidArgs (message) {
 
 
 async function setPref (message, args) {
-	if (!message.author.hasPermission('MANAGE_GUILD')) {
+	if (!message.member.hasPermission('MANAGE_GUILD')) {
 		ping(message);
 		message.channel.send("You don't have the permission 'MANAGE_GUILD' to perform this command!");
 	} else {
