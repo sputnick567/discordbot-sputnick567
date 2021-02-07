@@ -1,11 +1,18 @@
 
 
-
+function ping (message) {
+	message.channel.send("<@!" + message.author.id + ">,");
+}
 
 function ban (message, args) {
 	if (message.member.hasPermission('BAN_MEMBERS')) {
-		console.log(message.mentions.users);
-		console.log(args);
+		if (message.mentions.members.size > 0) {
+			var users = message.mentions.members.first(message.mentions.members.size);
+			console.log(users);
+		} else {
+			ping(message);
+			message.channel.send("Please specify a user!");
+		}
 	} else {
 		ping(message);
 		message.channel.send("You don't have the permission 'BAN_MEMBERS' to perform this command!");
