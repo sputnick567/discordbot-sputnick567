@@ -5,7 +5,7 @@ function ping (message) {
 }
 
 function removeElement(element, array) {
-	const index = array.indexOf(elemt);
+	const index = array.indexOf(element);
 	if (index > -1) {
 		array.splice(index, 1);
 	}
@@ -31,6 +31,8 @@ function ban (message, args) {
 			for (user of users) {
 				user.ban({reason: banReason});
 			}
+			ping(message);
+			message.channel.send("Successfully banned the users!");
 		} else {
 			ping(message);
 			message.channel.send("Please specify a user!");
