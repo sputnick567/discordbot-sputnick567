@@ -4,7 +4,7 @@
 
 function ban (message, args) {
 	if (message.member.hasPermission('BAN_MEMBERS')) {
-		console.log(message.mentions);
+		console.log(message.mentions.users);
 		console.log(args);
 	} else {
 		ping(message);
