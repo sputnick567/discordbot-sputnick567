@@ -2,14 +2,7 @@ const database = require("./db.js");
 const adminCmds = new Map();
 
 
-function admin (message, args) {
-	// !admin 
-}
 
-function isOwner (message) {
-	const guild = message.guild;
-	return guild.ownerID === message.author.id;
-}
 
 function ping (message) {
 	message.channel.send("<@!" + message.author.id + ">,");

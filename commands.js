@@ -140,9 +140,10 @@ commands.set("help", [help, "help <cmdName>", "shows list of all commands", {"he
 commands.set("test", [test, "","test command","", false])
 
 //adding mod commands
-/*Array.from(modCmd.modCmds.keys()).map(key => {
+console.log("Adding mod commands!");
+Array.from(modCmd.modCmds.keys()).map(key => {
 	commands.set(key, modCmd.modCmds.get(key));
-});*/
+});
 
 //adding admin commands
 console.log("Adding admin commands!");

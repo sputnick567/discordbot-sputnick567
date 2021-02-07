@@ -1,14 +1,15 @@
-function mod (message, args) {
-	//mod add <rank>
-	//mod add player
-	//mod remove
-	//mod reset
-}
+
 
 
 
 function ban (message, args) {
-
+	if (message.member.hasPermission('BAN_MEMBERS')) {
+		console.log(message.mentions);
+		console.log(args);
+	} else {
+		ping(message);
+		message.channel.send("You don't have the permission 'BAN_MEMBERS' to perform this command!");
+	}
 }
 
 function unban (message, args) {
