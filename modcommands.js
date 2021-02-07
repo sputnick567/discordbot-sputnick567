@@ -53,7 +53,7 @@ function unban (message, args) {
 
 async function banlist (message, args) {
 	if (message.member.hasPermission('BAN_MEMBERS')) {
-		const messageEmbed = new Discord.MessageEmbed()
+		const banlistEmbed = new Discord.MessageEmbed()
 		.setColor('#0DB877')
 		.setTitle("Banlist for server " + message.guild.name)
 		.setDescription("All banned users on this server")
@@ -61,8 +61,10 @@ async function banlist (message, args) {
 		try {
 			const banList = await message.guild.fetchBans();
 			for (bannedUser of banList) {
-				console.log(bannedUser[1]["reason"]);
+				banlistEmbed.addField(bannedUser[1]["User"]["username"] + "#" + bannedUser[1]["User"]["discriminator"], bannedUser[1]["reason"]);
 			}
+			ping(message);
+			message.channel.send(banlistEmbed);
 		} catch(err) {
 			console.trace();
 			console.log(err);
