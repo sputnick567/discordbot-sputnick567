@@ -1,4 +1,4 @@
-
+const Discord = require("discord.js");
 
 function ping (message) {
 	message.channel.send("<@!" + message.author.id + ">,");
