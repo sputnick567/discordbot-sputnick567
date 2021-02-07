@@ -61,7 +61,7 @@ async function banlist (message, args) {
 		try {
 			const banList = await message.guild.fetchBans();
 			for (bannedUser of banList) {
-				console.log(bannedUser[1]);
+				console.log(bannedUser[1]["reason"]);
 			}
 		} catch(err) {
 			console.trace();
