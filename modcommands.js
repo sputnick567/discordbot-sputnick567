@@ -4,11 +4,33 @@ function ping (message) {
 	message.channel.send("<@!" + message.author.id + ">,");
 }
 
+function removeElement(element, array) {
+	const index = array.indexOf(elemt);
+	if (index > -1) {
+		array.splice(index, 1);
+	}
+	return array;
+}
+
 function ban (message, args) {
 	if (message.member.hasPermission('BAN_MEMBERS')) {
 		if (message.mentions.members.size > 0) {
 			var users = message.mentions.members.first(message.mentions.members.size);
-			console.log(users);
+			if (users.size === 0) {
+				ping(message);
+				message.channel.send("Please specify user(s)!");
+				return;
+			} 
+			for (arg of args) {
+				if (arg.startsWith("<@")) {
+					args = removeElement(arg, args);
+				}
+			}
+
+			var banReason = args.length > 0 ? args.join(" ") : "No reason";
+			for (user of users) {
+				user.ban({reason: banReason});
+			}
 		} else {
 			ping(message);
 			message.channel.send("Please specify a user!");
