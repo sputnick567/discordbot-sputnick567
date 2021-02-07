@@ -22,4 +22,4 @@ mCommands.set("ban", [ban, "ban [user]", "ban a user from the server", {"ban [us
 mCommands.set("unban", [unban, "unban [user]", "unban a user from the server", {"unban [user]": "Unban a user. Needs mod rank!"}])
 
 
-module.exports.modCommands = mCommands;
+module.exports.modCmds = mCommands;
