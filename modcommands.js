@@ -29,7 +29,11 @@ function ban (message, args) {
 
 			var banReason = args.length > 0 ? args.join(" ") : "No reason";
 			for (user of users) {
-				user.ban({reason: banReason});
+				if (user.bannable) {user.ban({reason: banReason});}
+				else {
+					message.channel.send("Can not ban " + user.username);
+				}
+				
 			}
 			ping(message);
 			message.channel.send("Successfully banned the users!");
@@ -47,10 +51,32 @@ function unban (message, args) {
 
 }
 
+async function banlist (message, args) {
+	if (message.member.hasPermission('BAN_MEMBERS')) {
+		const messageEmbed = new Discord.MessageEmbed()
+		.setColor('#0DB877')
+		.setTitle("Banlist for server " + message.guild.name)
+		.setDescription("All banned users on this server")
+		.setTimestamp();
+		try {
+			const banList = await message.guild.fetchBans();
+			for (bannedUser of banList) {
+				console.log(bannedUser);
+			}
+		} catch(err) {
+			console.trace();
+			console.log(err);
+		}
+	} else {
+		ping(message);
+		message.channel.send("You don't have the permission 'BAN_MEMBERS' to perform this command!");
+	}
+}
+
 mCommands = new Map();
-
-mCommands.set("ban", [ban, "ban [user]", "ban a user from the server", {"ban [user]": "Ban a user. Needs mod rank!"}]);
-mCommands.set("unban", [unban, "unban [user]", "unban a user from the server", {"unban [user]": "Unban a user. Needs mod rank!"}])
-
+//name, [function, usage, description, detailDescript, show in !help]
+mCommands.set("ban", [ban, "ban [user]", "ban a user from the server", {"ban [user]": "Ban a user. Needs permission!", "ban [user] <Ban reason>"}, true]);
+mCommands.set("unban", [unban, "unban [user]", "unban a user from the server", {"unban [user]": "Unban a user. Needs permission!"}, true]);
+mCommands.set("banlist", [banlist, "banlist", "shows all banned users from this server", {"banlist": "Shows all banned users from this server"}, true]);
 
 module.exports.modCmds = mCommands;
