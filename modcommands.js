@@ -31,7 +31,7 @@ function ban (message, args) {
 			for (user of users) {
 				if (user.bannable) {user.ban({reason: banReason});}
 				else {
-					message.channel.send("Can not ban " + user.nickname);
+					message.channel.send("Can not ban " + user.displayName);
 				}
 				
 			}
