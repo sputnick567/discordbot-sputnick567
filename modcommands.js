@@ -77,7 +77,7 @@ async function banlist (message, args) {
 		try {
 			const banList = await message.guild.fetchBans();
 			for (bannedUser of banList) {
-				banlistEmbed.addField(bannedUser[1]["user"]["username"] + "#" + bannedUser[1]["user"]["discriminator"], bannedUser[1]["reason"]);
+				banlistEmbed.addField(bannedUser[1]["user"]["username"] + "#" + bannedUser[1]["user"]["discriminator"], bannedUser[1]["reason"] + "\n" + bannedUser[1]["id"]);
 			}
 			ping(message);
 			message.channel.send(banlistEmbed);
