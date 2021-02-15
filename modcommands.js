@@ -52,7 +52,8 @@ async function unban (message, args) {
 		try {
 			if (args.length === 1) {
 				let res = await message.guild.members.unban(args[0]);
-				console.log(res);
+				ping(message);
+				message.channel.send("User " + res.username + "#" + res.discriminator + " with id " + res.id + " was unbanned!");
 			} else {
 				ping(message);
 				message.channel.send("Please specify only one id!");
