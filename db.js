@@ -7,10 +7,7 @@ var qResult = false;
 
 const cmdPref = "commandprefix";
 const cmds = "commands";
-
-const adminRank = "adminrank";
-const modRank = "modrank";
-
+const welcomMsg = "welcomemessage";
 const client = new Client({
 	connectionString: process.env.DATABASE_URL,
 	ssl: {
@@ -33,8 +30,8 @@ function init () {
 
 		}
 	});
-	//client.query("DROP TABLE servers.server_info");
-	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(50), commands varchar(20480));", (err, res) => {
+	client.query("DROP TABLE servers.server_info");
+	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(256), commands varchar(20480));", (err, res) => {
 	
 		//function with param err and res
 		if (err) {
@@ -48,14 +45,7 @@ function init () {
 	});
 
 }
-async function getModRank (serverId) {
-	if (serverExists(serverId)) {
-		let res = await client.query("SELECT modrank FROM servers.server_info WHERE serverId = '" + serverId + "';");
-		return res.rows[0][modRank];
-	} else {
-		return "";
-	}
-}
+
 
 async function setPrefix (serverId, prefix) {
 	if (serverExists(serverId)) {
@@ -66,14 +56,6 @@ async function setPrefix (serverId, prefix) {
 	}
 }
 
-async function getAdminRank (serverId) {
-	if (serverExists(serverId)) {
-		let res = await client.query("SELECT adminrank FROM servers.server_info WHERE serverID = '" + serverId + "';");
-		return res.rows[0][adminRank];
-	} else {
-		return "";
-	}
-}
 
 async function serverExists (serverId) {
 	console.log("Checking if server exists: " + serverId);
@@ -148,11 +130,25 @@ async function addServer (serverId) {
 } 
 
 
+
+async function getWelcomeMsg (serverId) {
+	let res = await client.query("SELECT welcomeMessage FROM servers.server_info WHERE serverID = '" + serverId + "';");
+	if (res.rows.length === 0) {
+		let s = await serverExists(serverId);
+		if (s) {
+			return null
+		} else {
+			return defaultWelcomeMessage.replaceAll("<c>", ",");
+		}
+	} else {
+		return res.rows[0][welcomMsg];
+	}
+}
+
 module.exports.init = init;
 module.exports.getCommands = getCommands;
 module.exports.getPrefix = getPrefix;
 module.exports.serverExists = serverExists;
 module.exports.addServer = addServer;
-module.exports.getAdminRank = getAdminRank;
-module.exports.getModRank = getModRank;
 module.exports.setPrefix = setPrefix;
+module.exports.getWelcomeMsg = getWelcomeMsg;

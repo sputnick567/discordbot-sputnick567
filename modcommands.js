@@ -47,8 +47,14 @@ function ban (message, args) {
 	}
 }
 
-function unban (message, args) {
-
+async function unban (message, args) {
+	if (message.member.hasPermission('BAN_MEMBERS')) {
+		let res = await message.guild.members.unban(args[0]);
+		console.log(res);
+	} else {
+		ping(message);
+		message.channel.send("You don't have the permission 'BAN_MEMBERS' to perform this command!");
+	}
 }
 
 async function banlist (message, args) {

@@ -46,6 +46,16 @@ client.on("message", async message => {
     } 
 });
 
+client.on("guildCreate", guild => {
+   cmdMngr.db.addServer(guild.id);
+});
+
+client.on('guildMemberAdd', member => {
+	console.log(member.guild.id);
+	
+});
+
+
 try {
 client.login(process.env.BOT_TOKEN);
 } catch (error) {
