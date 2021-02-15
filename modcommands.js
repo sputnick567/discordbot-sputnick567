@@ -49,8 +49,18 @@ function ban (message, args) {
 
 async function unban (message, args) {
 	if (message.member.hasPermission('BAN_MEMBERS')) {
-		let res = await message.guild.members.unban(args[0]);
-		console.log(res);
+		try {
+			if (args.length === 1) {
+				let res = await message.guild.members.unban(args[0]);
+				console.log(res);
+			} else {
+				ping(message);
+				message.channel.send("Please specify only one id!");
+			}
+		} catch (err) {
+			console.trace();
+			console.log(err);
+		}
 	} else {
 		ping(message);
 		message.channel.send("You don't have the permission 'BAN_MEMBERS' to perform this command!");
