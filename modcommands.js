@@ -68,6 +68,50 @@ async function unban (message, args) {
 	}
 }
 
+function kick (message, args) {
+	if (message.member.hasPermission('KICK_MEMBERS')) {
+		if (message.mentions.members.size > 0) {
+			var users = message.mentions.members.first(message.mentions.members.size);
+			if (users.size === 0) {
+				ping(message);
+				message.channel.send("Please specify user(s)!");
+				return;
+			} 
+			for (arg of args) {
+				if (arg.startsWith("<@")) {
+					args = removeElement(arg, args);
+				}
+			}
+
+			var kickReason = args.length > 0 ? args.join(" ") : "No reason";
+			var kickEmbed = new Discord.MessageEmbed()
+			.setColor('#cc4f0f')
+			.setTitle("Kicked by " + message.author.username)
+			.setDescription("Kicks")
+			.setTimestamp();
+
+			for (user of users) {
+				if (user.bannable) {
+					user.kick({reason: kickReason});
+					kickEmbed.addField(user.username + "#" + user.discriminator, kickReason);
+				}
+				else {
+					message.channel.send("Can not kick " + user.displayName);
+				}
+				
+			}
+			ping(message);
+			message.channel.send(kickEmbed);
+		} else {
+			ping(message);
+			message.channel.send("Please specify a user!");
+		}
+	} else {
+		ping(message);
+		message.channel.send("You don't have the permission 'KICK_MEMBERS' to perform this command!");
+	}
+}
+
 async function banlist (message, args) {
 	if (message.member.hasPermission('BAN_MEMBERS')) {
 		const banlistEmbed = new Discord.MessageEmbed()
