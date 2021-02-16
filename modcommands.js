@@ -141,5 +141,6 @@ mCommands = new Map();
 mCommands.set("ban", [ban, "ban [user]", "ban a user from the server", {"ban [user]": "Ban a user. Needs permission!", "ban [user] <Ban reason>": "Ban a user for reason. Needs permission!"}, true]);
 mCommands.set("unban", [unban, "unban [user]", "unban a user from the server", {"unban [user]": "Unban a user. Needs permission!"}, true]);
 mCommands.set("banlist", [banlist, "banlist", "shows all banned users from this server", {"banlist": "Shows all banned users from this server"}, true]);
+mCommands.set("kick", [kick, "kick [user]", "kick a user from the server", {"kick [user]": "Kick a user"}, true]);
 
 module.exports.modCmds = mCommands;
