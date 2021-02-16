@@ -28,8 +28,16 @@ function ban (message, args) {
 			}
 
 			var banReason = args.length > 0 ? args.join(" ") : "No reason";
+			var banEmbed = new Discord.MessageEmbed()
+			.setColor('#a70fcc')
+			.setTitle("Banned by " + message.author.username)
+			.setDescription("Bans")
+			.setTimestamp();
 			for (user of users) {
-				if (user.bannable) {user.ban({reason: banReason});}
+				if (user.bannable) {
+					user.ban({reason: banReason});
+					banEmbed.addField(user.username)
+				}
 				else {
 					message.channel.send("Can not ban " + user.displayName);
 				}
@@ -94,6 +102,7 @@ function kick (message, args) {
 				if (user.bannable) {
 					user.kick({reason: kickReason});
 					kickEmbed.addField(user.username + "#" + user.discriminator, kickReason);
+					console.log(user);
 				}
 				else {
 					message.channel.send("Can not kick " + user.displayName);
