@@ -36,7 +36,7 @@ function ban (message, args) {
 			for (user of users) {
 				if (user.bannable) {
 					user.ban({reason: banReason});
-					banEmbed.addField(user.username)
+					banEmbed.addField(user.user)
 				}
 				else {
 					message.channel.send("Can not ban " + user.displayName);
@@ -101,8 +101,7 @@ function kick (message, args) {
 			for (user of users) {
 				if (user.bannable) {
 					user.kick({reason: kickReason});
-					kickEmbed.addField(user.username + "#" + user.discriminator, kickReason);
-					console.log(user);
+					kickEmbed.addField(user.user["username"] + "#" + user.user["discriminator"], kickReason);
 				}
 				else {
 					message.channel.send("Can not kick " + user.displayName);
