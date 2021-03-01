@@ -31,7 +31,7 @@ function init () {
 		}
 	});
 	client.query("DROP TABLE servers.server_info");
-	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(256), commands varchar(20480));", (err, res) => {
+	client.query("CREATE TABLE IF NOT EXISTS servers.server_info (serverID varchar(30), commandPrefix varchar(5), welcomeMessage varchar(256), commands varchar(20480), partyChannel varchar(20));", (err, res) => {
 	
 		//function with param err and res
 		if (err) {
@@ -46,6 +46,9 @@ function init () {
 
 }
 
+async function getPartyChannel (serverId) {
+	//
+}
 
 async function setPrefix (serverId, prefix) {
 	if (serverExists(serverId)) {
@@ -152,3 +155,4 @@ module.exports.serverExists = serverExists;
 module.exports.addServer = addServer;
 module.exports.setPrefix = setPrefix;
 module.exports.getWelcomeMsg = getWelcomeMsg;
+module.exports.getPartyChannel = getPartyChannel;

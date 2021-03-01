@@ -36,7 +36,7 @@ function ban (message, args) {
 			for (user of users) {
 				if (user.bannable) {
 					user.ban({reason: banReason});
-					banEmbed.addField(user.user)
+					banEmbed.addField(user.user["username"] + "#" + user.user["discriminator"], banReason);
 				}
 				else {
 					message.channel.send("Can not ban " + user.displayName);
@@ -44,7 +44,7 @@ function ban (message, args) {
 				
 			}
 			ping(message);
-			message.channel.send("Successfully banned the users!");
+			message.channel.send(banEmbed);
 		} else {
 			ping(message);
 			message.channel.send("Please specify a user!");

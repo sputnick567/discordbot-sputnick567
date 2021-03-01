@@ -12,7 +12,14 @@ function invalidArgs (message) {
 	ping(message);
 	message.channel.send("Invalid arguments! use !help <cmd> to get help to this command")
 }
-
+async function setPartyChannel (message, args) {
+	if (!message.member.hasPermission('MANAGE_GUILD')) {
+		ping(message);
+		message.channel.send("You don't have the permission 'MANAGE_GUILD' to perform this command!");
+	} else {
+		
+	}
+}
 
 async function setPref (message, args) {
 	if (!message.member.hasPermission('MANAGE_GUILD')) {
@@ -46,3 +53,4 @@ async function setPref (message, args) {
 adminCmds.set("setPref", [setPref, "setPref [prefix]","set the prefix for sputnick567-bot on this server!", {"setPref": "set the prefix for sputnick567-bot on this server!"}, true]);
 
 module.exports.adminCmds = adminCmds;
+module.exports.setPartyChannel = setPartyChannel;

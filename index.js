@@ -11,7 +11,7 @@ client.once("ready", () => { // prints "Ready!" to the console once the bot is o
 
 
 
-
+const partyChannels = require("./partyChannels.js");
 const commands = cmdMngr.commands;
 
 
@@ -55,7 +55,9 @@ client.on('guildMemberAdd', member => {
 	
 });
 
-
+bot.on('voiceStateUpdate', (oldMember, newMember) => {
+	partyChannels.event(oldMember, newMember);
+});
 try {
 client.login(process.env.BOT_TOKEN);
 } catch (error) {
