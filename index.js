@@ -55,7 +55,7 @@ client.on('guildMemberAdd', member => {
 	
 });
 
-bot.on('voiceStateUpdate', (oldMember, newMember) => {
+client.on('voiceStateUpdate', (oldMember, newMember) => {
 	partyChannels.event(oldMember, newMember);
 });
 try {
