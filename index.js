@@ -58,6 +58,7 @@ client.on('guildMemberAdd', member => {
 client.on('voiceStateUpdate', (oldMember, newMember) => {
 	console.log(oldMember);
 	console.log(newMember);
+	//check
 	partyChannels.event(oldMember, newMember);
 });
 try {
